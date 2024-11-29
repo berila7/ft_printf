@@ -34,6 +34,8 @@ int	ft_check(va_list args, char c)
 		result = ft_putnbr(va_arg(args, unsigned int), 0);
 	else if (c == '%')
 		return (ft_putchar('%'));
+	else
+		return (ft_putchar(c));
 	return (result);
 }
 
@@ -52,8 +54,10 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			if (str[i + 1] != '\0')
-				result += ft_check(args, str[++i]);
+			i++;
+			if (str[i] == '\0')
+				break ;
+			result += ft_check(args, str[i]);
 		}
 		else
 			result += ft_putchar(str[i]);
